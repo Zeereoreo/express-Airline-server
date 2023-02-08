@@ -8,14 +8,25 @@ module.exports = {
   findAll: (req, res) => {
     const { departure_times, arrival_times, destination, departure } = req.query;
     // TODO:
-
-    return res.json(flights);
+    if(departure_times && arrival_times){
+      let filtered = flights.filter(el => el.departure_times === departure_times && el.arrival_times === arrival_times)
+      return res.json(filtered)
+    }
+    if (departure && destination){
+      let filtered = flights.filter(el => el.departure === departure && el.destination === destination)
+      return res.json(filtered)
+    }
+    return res.json(flights)
   },
   // [GET] /flight/:uuid
   // 요청 된 uuid 값과 동일한 uuid 값을 가진 항공편 데이터를 조회합니다.
   findById: (req, res) => {
     const { uuid } = req.params;
     // TODO:
+    if(uuid){
+      let filtered = flights.filter(el => uuid === el.uuid)
+      return res.json(filtered)
+    }
 
   },
 
@@ -25,6 +36,14 @@ module.exports = {
   update: (req, res) => {
     const { uuid } = req.params;
     const bodyData = req.body;
-     // TODO:
+    if(uuid){
+      data = flights.find((el) => el.uuid === uuid) // filter 메소드 대신 find 메소드 사용
+
+      if(bodyData){
+        Object.assign(data, bodyData); // Object.keys 메소드 대신 Object.assign 메소드 사용
+      }
+
+      return res.status(200).json(data);
+    }
   }
 };
