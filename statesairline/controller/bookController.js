@@ -51,14 +51,7 @@ module.exports = {
   deleteByBookingId: (req, res) => {
     const {booking_uuid} = req.params;
     // TODO:
-    if(req.params){
-      let list = booking;
-      if(req.query.phone){
-        list = list.filter((item)=>{
-          return req.query.phone !== item.phone;
-        })
-      }
-      return res.status(200).json(list);
-    }
+    booking = booking.filter(el => el.booking_uuid !== booking_uuid);
+    return res.json({booking_uuid});
   }
 }
