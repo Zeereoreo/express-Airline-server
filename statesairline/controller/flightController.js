@@ -36,14 +36,12 @@ module.exports = {
   update: (req, res) => {
     const { uuid } = req.params;
     const bodyData = req.body;
-    if(uuid){
-      data = flights.find((el) => el.uuid === uuid) // filter 메소드 대신 find 메소드 사용
-
-      if(bodyData){
-        Object.assign(data, bodyData); // Object.keys 메소드 대신 Object.assign 메소드 사용
-      }
-
-      return res.status(200).json(data);
+    const idx = flights.findIndex((el) => el.uuid === uuid)
+    const newFlight = {
+      ...flights[idx],
+      ...bodyData,
     }
+    flights.splice(idx, 1, newFlight)
+    return res.json(newFlight)
   }
 };
