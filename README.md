@@ -4,7 +4,7 @@ var morgan = require('morgan')
 morgan('tiny')
 
 미들웨어 종류
-
+https://expressjs.com/ko/resources/middleware.html
 body-parser	HTTP 요청 body를 파싱합니다. body, co-body, 그리고 raw-body도 참고하세요.	express.bodyParser
 compression	HTTP 요청들을 압축합니다.	express.compress
 connect-rid	고유한 요청 ID를 생성합니다.	없음
